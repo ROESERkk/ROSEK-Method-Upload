@@ -108,17 +108,50 @@ ffmpeg = engine;
   const inputName='input.'+ext, outputName='roseK_output.mp4';
   setStatus('Preparando archivo…',8);
   await ffmpeg.writeFile(inputName,new Uint8Array(await selectedFile.arrayBuffer()));
-  const args=['-i',inputName,'-map','0:v:0'];
-  if($('audio').checked)args.push('-map','0:a:0?');
-  args.push('-c:v','libx264','-preset','medium','-crf',$('quality').value,'-pix_fmt','yuv420p');
-  const size=$('size').value;
-  if(size!=='source')args.push('-vf',`scale=${size}:force_original_aspect_ratio=decrease,pad=${size}:(ow-iw)/2:(oh-ih)/2`);
-  const fps=$('fps').value;
-  if(fps!=='source'){args.push('-r',fps,'-fps_mode','cfr');}
-  if($('audio').checked)args.push('-c:a','aac','-b:a','192k');else args.push('-an');
-  args.push('-movflags','+faststart','-y',outputName);
-  setStatus('Convirtiendo en tu navegador…',10);
-  await ffmpeg.exec(args);
+  
+const args = ['-i', inputName, '-map', '0:v:0'];
+
+if ($('audio').checked) {
+  args.push('-map', '0:a:0?');
+}
+
+// Máxima calidad práctica con H.264
+args.push(
+  '-c:v', 'libx264',
+  '-preset', 'slow',
+  '-crf', $('quality').value,
+  '-pix_fmt', 'yuv420p'
+);
+
+// Resolución seleccionada
+const size = $('size').value;
+
+if (size !== 'source') {
+  args.push(
+    '-vf',
+    `scale=${size}:force_original_aspect_ratio=decrease,pad=${size}:(ow-iw)/2:(oh-ih)/2`
+  );
+}
+
+// FPS seleccionado
+const fps = $('fps').value;
+
+if (fps !== 'source') {
+  args.push('-r', fps, '-fps_mode', 'cfr');
+}
+
+// Audio
+if ($('audio').checked) {
+  args.push('-c:a', 'aac', '-b:a', '192k');
+} else {
+  args.push('-an');
+}
+
+args.push('-movflags', '+faststart', '-y', outputName);
+
+setStatus('Convirtiendo en tu navegador…', 10);
+await ffmpeg.exec(args);
+
   const data=await ffmpeg.readFile(outputName);
   const blob=new Blob([data.buffer],{type:'video/mp4'});
   outputUrl=URL.createObjectURL(blob);$('download').hidden=false;$('download').onclick=()=>{const a=document.createElement('a');a.href=outputUrl;a.download=(selectedFile.name.replace(/\.[^.]+$/,'')+'_ROSEK.mp4');a.click()};
