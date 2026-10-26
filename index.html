@@ -84,18 +84,16 @@ engine.on('progress', ({ progress }) => {
 const ffmpegCorePath =
   'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd';
 
+
 await engine.load({
   classWorkerURL:
     'https://roeserkk.github.io/ROSEK-Method-Upload/ffmpeg/worker.js',
-  coreURL: await toBlobURL(
-    ffmpegCorePath + '/ffmpeg-core.js',
-    'text/javascript'
-  ),
-  wasmURL: await toBlobURL(
-    ffmpegCorePath + '/ffmpeg-core.wasm',
-    'application/wasm'
-  )
+  coreURL:
+    'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm/ffmpeg-core.js',
+  wasmURL:
+    'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm/ffmpeg-core.wasm'
 });
+
 
 if (!engine.loaded) {
   throw new Error('FFmpeg no terminó de cargar.');
