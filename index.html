@@ -27,19 +27,46 @@
 <video id="preview" controls playsinline style="display:none;width:100%;max-height:300px;margin-top:15px;border-radius:12px;background:#000"></video>
 </section>
 <section class="panel"><h2>02 / Preparar exportación</h2><p class="sub">Elegí una configuración y generá un MP4.</p>
-<div class="fields">
-<div class="field full"><label for="fps">Frecuencia de cuadros</label><select id="fps"><option value="source">Conservar FPS de origen (recomendado)</option><option value="59.94">59,94 FPS</option><option value="60">60 FPS</option><option value="29.97">29,97 FPS</option><option value="30">30 FPS</option></select></div>
-<div class="field"><label for="quality">Calidad</label><select id="quality"><option value="18">Muy alta (CRF 18)</option><option value="20" selected>Alta (CRF 20)</option><option value="23">Equilibrada (CRF 23)</option><option value="26">Archivo más pequeño (CRF 26)</option></select></div>
-<div class="field"><label for="size">Resolución de salida</label><select id="size"><option value="source" selected>Conservar resolución</option><option value="1080x1920">1080 × 1920 vertical</option><option value="720x1280">720 × 1280 vertical</option></select></div>
-<div class="field full"><label for="codec">Códec de salida</label><select id="codec"><option value="h264" selected>H.264 / AVC (más compatible)</option></select></div>
+
+<div class="field full">
+  <label for="fps">Frecuencia de cuadros</label>
+  <select id="fps">
+    <option value="source">Conservar FPS de origen</option>
+    <option value="30">30 FPS</option>
+    <option value="60">60 FPS</option>
+    <option value="120">120 FPS</option>
+  </select>
 </div>
-<label class="check"><input id="audio" type="checkbox" checked> Incluir audio AAC cuando esté disponible</label>
-<button id="convert" class="btn" disabled>Elegí un video para empezar</button>
-<div class="progress"><div class="bar" id="bar"></div></div><div class="status" id="status" role="status">Esperando un archivo…</div>
-<button id="download" class="btn secondary" hidden>Descargar MP4</button>
-<div class="notice"><b>Importante:</b> la primera conversión descarga el motor FFmpeg WebAssembly desde un CDN y puede tardar. El navegador necesita memoria suficiente. No se envía el video a un servidor de ROSEK. Esta versión exporta H.264; no ofrece HEVC/H.265 porque el motor web estándar no garantiza ese codificador.</div>
-</section>
+
+<div class="field">
+  <label for="quality">Calidad</label>
+  <select id="quality">
+    <option value="16">Máxima calidad (CRF 16)</option>
+    <option value="18">Muy alta (CRF 18)</option>
+    <option value="20" selected>Alta (CRF 20)</option>
+    <option value="23">Equilibrada (CRF 23)</option>
+    <option value="26">Archivo más pequeño (CRF 26)</option>
+  </select>
 </div>
+
+<div class="field">
+  <label for="size">Resolución de salida</label>
+  <select id="size">
+    <option value="source" selected>Conservar resolución</option>
+    <option value="1920x1080">1080p horizontal</option>
+    <option value="1080x1920">1080p vertical</option>
+    <option value="3840x2160">4K horizontal</option>
+    <option value="2160x3840">4K vertical</option>
+  </select>
+</div>
+
+<div class="field full">
+  <label for="codec">Códec de salida</label>
+  <select id="codec">
+    <option value="h264" selected>H.264 / AVC (más compatible)</option>
+  </select>
+</div>
+
 </main>
 <footer class="wrap footer">ROSEK Studio · Herramienta de navegador. Los FPS mostrados por el reproductor son estimados por metadatos del navegador; para una medición exacta de FPS variables se requiere inspección de fotogramas.</footer>
 <script type="module">
