@@ -150,15 +150,19 @@ args.push(
   '-pix_fmt', 'yuv420p'
 );
 
-// Resolución seleccionada
+
+ // Resolución seleccionada: conservar proporciones
 const size = $('size').value;
 
 if (size !== 'source') {
+  const [targetW, targetH] = size.split('x').map(Number);
+
   args.push(
     '-vf',
-    `scale=${size}:force_original_aspect_ratio=decrease,pad=${size}:(ow-iw)/2:(oh-ih)/2`
+    `scale=${targetW}:${targetH}:force_original_aspect_ratio=decrease,pad=${targetW}:${targetH}:(ow-iw)/2:(oh-ih)/2`
   );
 }
+
 
 // FPS seleccionado
 const fps = $('fps').value;
