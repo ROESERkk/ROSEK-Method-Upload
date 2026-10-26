@@ -85,9 +85,7 @@ if (!engine.loaded) {
 }
 
 ffmpeg = engine;
-   ffmpeg.on('progress',({progress})=>setStatus('Convirtiendo video…',10+Math.round(progress*85)));
-   const base='https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-   await ffmpeg.load({coreURL:await toBlobURL(base+'/ffmpeg-core.js','text/javascript'),wasmURL:await toBlobURL(base+'/ffmpeg-core.wasm','application/wasm')});
+   
   }
   const ext=(selectedFile.name.split('.').pop()||'mp4').toLowerCase().replace(/[^a-z0-9]/g,'')||'mp4';
   const inputName='input.'+ext, outputName='roseK_output.mp4';
