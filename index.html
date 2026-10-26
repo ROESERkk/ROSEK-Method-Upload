@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0910">
+<title>ROSEK Studio</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0910;--panel:#14111b;--line:#30263a;--muted:#aaa0b7;--text:#f8f4fc;--pink:#e5a3ff;--violet:#9c6bff;--green:#8ee7c0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#281635 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{width:min(1100px,92vw);margin:auto}.top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid #ffffff12}.brand{display:flex;gap:12px;align-items:center;font-weight:850;letter-spacing:.02em;font-size:21px}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#edb4ff,#8652e8);color:#170d20;font-size:23px;font-weight:950;box-shadow:0 0 30px #b46dff28}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 12px;color:var(--muted);font-size:12px}
+.hero{padding:48px 0 26px}.eyebrow{color:var(--pink);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;letter-spacing:-.045em;margin:12px 0}.hero h1 span{background:linear-gradient(90deg,#f2c6ff,#a987ff);background-clip:text;color:transparent}.hero p{max-width:670px;color:var(--muted);font-size:16px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding-bottom:38px}.panel{background:linear-gradient(180deg,#17131f,#100e16);border:1px solid var(--line);border-radius:20px;padding:22px;min-width:0}.panel h2{font-size:17px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}.drop{border:1.5px dashed #6e5085;border-radius:16px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;background:#b17bff08;cursor:pointer;transition:.2s}.drop:hover,.drop.drag{border-color:var(--pink);background:#b17bff12}.drop strong{margin-top:10px}.drop small{color:var(--muted);margin-top:5px}.drop input{display:none}.fileline{display:flex;align-items:center;gap:12px;padding:12px 0 0;min-width:0}.fileline .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.muted{color:var(--muted);font-size:12px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}.stat{border:1px solid #ffffff12;background:#ffffff04;border-radius:13px;padding:13px}.stat label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.stat b{font-size:19px;display:block;margin-top:4px;overflow-wrap:anywhere}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#d3c9df}.field select,.field input{width:100%;border:1px solid var(--line);background:#0d0a12;color:var(--text);padding:11px;border-radius:10px;font:inherit}.check{display:flex;gap:9px;align-items:center;color:#ddd3e8;font-size:13px;margin:14px 0}.btn{border:0;border-radius:12px;padding:13px 16px;background:linear-gradient(100deg,#e6a9ff,#a987ff);color:#1b1024;font-weight:850;cursor:pointer;width:100%;font:inherit}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.secondary{background:#21192b;color:#f4eaff;border:1px solid var(--line);margin-top:9px}.progress{height:7px;background:#2a2033;border-radius:9px;overflow:hidden;margin:14px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,#d99bff,#8d73ff);transition:width .2s}.status{font-size:12px;color:var(--muted);min-height:20px}.notice{border:1px solid #56412a;background:#21190f;color:#e9cda4;padding:12px;border-radius:12px;font-size:12px;margin-top:14px}.footer{padding:20px 0 34px;color:var(--muted);font-size:12px;border-top:1px solid #ffffff12}.footer a{color:var(--pink)}.sectiontitle{display:flex;align-items:center;gap:9px;margin-bottom:15px}.dot{width:8px;height:8px;background:var(--green);border-radius:50%}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding-top:34px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.top{padding:17px 0}.pill{display:none}}
+</style>
+</head>
+<body>
+<header class="wrap top"><div class="brand"><div class="logo">R</div>ROSEK Studio</div><div class="pill">VIDEO TOOLS · BROWSER-BASED</div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">Creator upload toolkit</div><h1>Tu video. Tu calidad.<br><span>Tu método de upload.</span></h1><p>Analizá tu edit y prepará una versión MP4 para subir. La configuración predeterminada conserva los FPS del archivo original; el procesamiento se realiza en tu navegador.</p></section>
+<div class="grid">
+<section class="panel"><h2>01 / Analizar video</h2><p class="sub">Elegí un archivo para ver sus datos básicos.</p>
+<label class="drop" id="drop"><input id="file" type="file" accept="video/*,.mkv,.mov,.mp4,.webm"><span style="font-size:32px">⇧</span><strong>Arrastrá tu video o hacé clic para elegirlo</strong><small>MP4, MOV, WebM y otros formatos compatibles con el navegador</small></label>
+<div class="fileline" id="fileline" hidden><span>🎞️</span><span class="name" id="filename"></span><span class="muted" id="filesize"></span></div>
+<div class="stats"><div class="stat"><label>Resolución</label><b id="resolution">—</b></div><div class="stat"><label>Duración</label><b id="duration">—</b></div><div class="stat"><label>FPS elegido</label><b id="fpsinfo">Origen</b></div><div class="stat"><label>Archivo</label><b id="formatinfo">—</b></div></div>
+<video id="preview" controls playsinline style="display:none;width:100%;max-height:300px;margin-top:15px;border-radius:12px;background:#000"></video>
+</section>
+<section class="panel"><h2>02 / Preparar exportación</h2><p class="sub">Elegí una configuración y generá un MP4.</p>
+<div class="fields">
+<div class="field full"><label for="fps">Frecuencia de cuadros</label><select id="fps"><option value="source">Conservar FPS de origen (recomendado)</option><option value="59.94">59,94 FPS</option><option value="60">60 FPS</option><option value="29.97">29,97 FPS</option><option value="30">30 FPS</option></select></div>
+<div class="field"><label for="quality">Calidad</label><select id="quality"><option value="18">Muy alta (CRF 18)</option><option value="20" selected>Alta (CRF 20)</option><option value="23">Equilibrada (CRF 23)</option><option value="26">Archivo más pequeño (CRF 26)</option></select></div>
+<div class="field"><label for="size">Resolución de salida</label><select id="size"><option value="source" selected>Conservar resolución</option><option value="1080x1920">1080 × 1920 vertical</option><option value="720x1280">720 × 1280 vertical</option></select></div>
+<div class="field full"><label for="codec">Códec de salida</label><select id="codec"><option value="h264" selected>H.264 / AVC (más compatible)</option></select></div>
+</div>
+<label class="check"><input id="audio" type="checkbox" checked> Incluir audio AAC cuando esté disponible</label>
+<button id="convert" class="btn" disabled>Elegí un video para empezar</button>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="status" id="status" role="status">Esperando un archivo…</div>
+<button id="download" class="btn secondary" hidden>Descargar MP4</button>
+<div class="notice"><b>Importante:</b> la primera conversión descarga el motor FFmpeg WebAssembly desde un CDN y puede tardar. El navegador necesita memoria suficiente. No se envía el video a un servidor de ROSEK. Esta versión exporta H.264; no ofrece HEVC/H.265 porque el motor web estándar no garantiza ese codificador.</div>
+</section>
+</div>
+</main>
+<footer class="wrap footer">ROSEK Studio · Herramienta de navegador. Los FPS mostrados por el reproductor son estimados por metadatos del navegador; para una medición exacta de FPS variables se requiere inspección de fotogramas.</footer>
+<script type="module">
+const $=id=>document.getElementById(id);
+let selectedFile=null, outputUrl=null, ffmpeg=null, busy=false;
+const setStatus=(s,p=null)=>{$('status').textContent=s;if(p!==null)$('bar').style.width=Math.max(0,Math.min(100,p))+'%'};
+const fmtBytes=n=>n<1024*1024?(n/1024).toFixed(0)+' KB':(n/1024/1024).toFixed(1)+' MB';
+const fmtTime=n=>{if(!Number.isFinite(n))return '—';let m=Math.floor(n/60),s=Math.floor(n%60);return `${m}:${String(s).padStart(2,'0')}`};
+function setFile(file){if(!file)return;selectedFile=file;if(outputUrl){URL.revokeObjectURL(outputUrl);outputUrl=null}$('download').hidden=true;$('fileline').hidden=false;$('filename').textContent=file.name;$('filesize').textContent=fmtBytes(file.size);$('formatinfo').textContent=(file.name.split('.').pop()||'Video').toUpperCase();$('convert').disabled=false;$('convert').textContent='Convertir a MP4';const url=URL.createObjectURL(file);const v=$('preview');v.src=url;v.style.display='block';v.onloadedmetadata=()=>{$('resolution').textContent=`${v.videoWidth} × ${v.videoHeight}`;$('duration').textContent=fmtTime(v.duration);};setStatus('Video listo. La conversión se hará en este dispositivo.',0)}
+$('file').addEventListener('change',e=>setFile(e.target.files[0]));
+$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});
+$('drop').addEventListener('dragleave',()=> $('drop').classList.remove('drag'));
+$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');setFile(e.dataTransfer.files[0])});
+$('fps').addEventListener('change',()=>{$('fpsinfo').textContent=$('fps').value==='source'?'Origen':$('fps').selectedOptions[0].textContent});
+$('convert').addEventListener('click',async()=>{
+ if(!selectedFile||busy)return;busy=true;$('convert').disabled=true;$('download').hidden=true;
+ try{
+  setStatus('Cargando motor de conversión…',3);
+  if(!ffmpeg){
+   const {FFmpeg}=await import('https://esm.sh/@ffmpeg/ffmpeg@0.12.10');
+   const {toBlobURL}=await import('https://esm.sh/@ffmpeg/util@0.12.1');
+   ffmpeg=new FFmpeg();
+   ffmpeg.on('progress',({progress})=>setStatus('Convirtiendo video…',10+Math.round(progress*85)));
+   const base='https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+   await ffmpeg.load({coreURL:await toBlobURL(base+'/ffmpeg-core.js','text/javascript'),wasmURL:await toBlobURL(base+'/ffmpeg-core.wasm','application/wasm')});
+  }
+  const ext=(selectedFile.name.split('.').pop()||'mp4').toLowerCase().replace(/[^a-z0-9]/g,'')||'mp4';
+  const inputName='input.'+ext, outputName='roseK_output.mp4';
+  setStatus('Preparando archivo…',8);
+  await ffmpeg.writeFile(inputName,new Uint8Array(await selectedFile.arrayBuffer()));
+  const args=['-i',inputName,'-map','0:v:0'];
+  if($('audio').checked)args.push('-map','0:a:0?');
+  args.push('-c:v','libx264','-preset','medium','-crf',$('quality').value,'-pix_fmt','yuv420p');
+  const size=$('size').value;
+  if(size!=='source')args.push('-vf',`scale=${size}:force_original_aspect_ratio=decrease,pad=${size}:(ow-iw)/2:(oh-ih)/2`);
+  const fps=$('fps').value;
+  if(fps!=='source'){args.push('-r',fps,'-fps_mode','cfr');}
+  if($('audio').checked)args.push('-c:a','aac','-b:a','192k');else args.push('-an');
+  args.push('-movflags','+faststart','-y',outputName);
+  setStatus('Convirtiendo en tu navegador…',10);
+  await ffmpeg.exec(args);
+  const data=await ffmpeg.readFile(outputName);
+  const blob=new Blob([data.buffer],{type:'video/mp4'});
+  outputUrl=URL.createObjectURL(blob);$('download').hidden=false;$('download').onclick=()=>{const a=document.createElement('a');a.href=outputUrl;a.download=(selectedFile.name.replace(/\.[^.]+$/,'')+'_ROSEK.mp4');a.click()};
+  setStatus(`Conversión terminada · ${fmtBytes(blob.size)}. Revisá el resultado antes de publicarlo.`,100);
+  await ffmpeg.deleteFile(inputName);await ffmpeg.deleteFile(outputName);
+ }catch(err){console.error(err);setStatus('No se pudo convertir: '+(err?.message||'error desconocido')+'. Probá con MP4/H.264 o un archivo más pequeño.',0)}
+ finally{busy=false;$('convert').disabled=!selectedFile;$('convert').textContent='Convertir a MP4'}
+});
+</script>
+</body></html>
